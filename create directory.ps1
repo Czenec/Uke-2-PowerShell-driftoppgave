@@ -14,6 +14,6 @@ New-Item -ItemType Directory -Path "C:\Fram IT\fellesområder"
 
 # Give full access
 $Acl = Get-Acl "C:\Data"
-$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("John Smith","FullControl","Allow")
+$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("Cain Roth","FullControl","Allow")
 $Acl.SetAccessRule($Ar)
-Set-Acl "C:\Data" $Acl
+Set-Acl "C:\test\dir" $Acl

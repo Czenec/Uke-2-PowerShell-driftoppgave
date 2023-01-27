@@ -15,7 +15,7 @@ New-ADOrganizationalUnit -Name "Ledergruppa" -Path "OU=Fram IT,OU=Brukere,DC=Pow
 New-ADOrganizationalUnit -Name "Salgsavdelingen" -Path "OU=Fram IT,OU=Brukere,DC=PowerShell-practice,DC=lan"
 New-ADOrganizationalUnit -Name "Utviklere" -Path "OU=Fram IT,OU=Brukere,DC=PowerShell-practice,DC=lan"
 
-
+<#
 # ---Hjemmeområder og Fellesområder---
 
 # ---Hjemmeområder---
@@ -35,7 +35,7 @@ New-Item -ItemType Directory -Path "C:\Fram IT\fellesområder"
 # ---Common settings---
 
 -HomeDirectory '\\Fram IT\hjemmeområder\%username%' -HomeDrive 'H:'
-
+#>
 
 # ---Ledergruppa---
 
