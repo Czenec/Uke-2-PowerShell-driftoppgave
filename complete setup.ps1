@@ -1,5 +1,19 @@
 import-module activedirectory
 
+
+#           ---DHCP scope---
+
+$ScopeName = "Scope01"
+$HostMin = "172.16.40.12"
+$HostsMax = "172.16.40.62"
+$SubnetMask = "255.255.255.192"
+$LeaseDuration = "0.00:30:00"
+
+Add-DhcpServerv4Scope -Name $ScopeName -StartRange $HostMin -EndRange $HostsMax -SubnetMask $SubnetMask -LeaseDuration $LeaseDuration
+
+
+#           ---Active Directory---
+
 New-ADOrganizationalUnit -Name "Grupper" -Path "DC=PowerShell-practice,DC=lan"
 
 New-ADGroup -Name "Ledergruppa" -GroupScope Global -GroupCategory Security -Path "OU=Grupper,DC=PowerShell-practice,DC=lan"
@@ -14,27 +28,6 @@ New-ADOrganizationalUnit -Name "Fram IT" -Path "OU=Brukere,DC=PowerShell-practic
 New-ADOrganizationalUnit -Name "Ledergruppa" -Path "OU=Fram IT,OU=Brukere,DC=PowerShell-practice,DC=lan"
 New-ADOrganizationalUnit -Name "Salgsavdelingen" -Path "OU=Fram IT,OU=Brukere,DC=PowerShell-practice,DC=lan"
 New-ADOrganizationalUnit -Name "Utviklere" -Path "OU=Fram IT,OU=Brukere,DC=PowerShell-practice,DC=lan"
-
-
-# ---Hjemmeområder og Fellesområder---
-
-# ---Hjemmeområder---
-New-Item -ItemType Directory -Path "C:\Fram IT\hjemmeområder"
-
-$NewAcl = Get-Acl -Path "C:\Fram IT\hjemmeområder"
-$isProtected = $true
-$preserveInheritance = $true
-$NewAcl.SetAccessRuleProtection($isProtected, $preserveInheritance)
-Set-Acl -Path "C:\Fram IT\hjemmeområder" -AclObject $NewAcl
-
-
-# ---Fellesområder---
-New-Item -ItemType Directory -Path "C:\Fram IT\fellesområder"
-
-
-# ---Common settings---
-
--HomeDirectory '\\Fram IT\hjemmeområder\%username%' -HomeDrive 'H:'
 
 
 # ---Ledergruppa---
