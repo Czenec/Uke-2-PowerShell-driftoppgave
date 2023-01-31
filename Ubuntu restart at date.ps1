@@ -1,20 +1,35 @@
-$counter = 0
+$Time = "08:47"
 
-while ($counter -lt 5)
-{
-    Write-Output "looping"
+$TotalSeconds = ((get-date $Time) - (get-date)).TotalSeconds;
+Write-Output $TotalSeconds
 
-    $TargetTime = [DateTime]::ParseExact("HH:mm:ss", "02:00:00", [System.Globalization.CultureInfo]::InvariantCulture)
+# Short version
+start-sleep ((get-date $Time) - (get-date)).TotalSeconds;
 
-    while ($(Get-Date) -lt $TargetTime)
-    {
-        Start-Sleep -Seconds 1
-    }
+# Tutorial version curtesy of u/JewStyleKungfu https://www.reddit.com/r/PowerShell/comments/2d8hy4/comment/cjn6d60/?utm_source=share&utm_medium=web2x&context=3
+#Set your execution time here
+<#
+$triggerTime = "7:00pm";
 
-    # Script continues after the specified time
+#Get a DateTime object for the Trigger Time
+$triggerDate = get-date $triggerTime;
 
-    sudo shutdown -r now
+#Get a DateTime object for the current time
+$currentDate = get-date;
+
+#Subtract the Current Date from the Trigger Date to get a TimeSpan object
+#representing the amount of time you need to sleep
+$timeToSleep = $triggerDate - $currentDate;
+
+#Convert the timespan to seconds for use as an argument in the start-sleep command
+$secondsToSleep = $timeToSleep.TotalSeconds;
+
+#Start sleeping
+start-sleep $secondsToSleep;
+#>
 
 
-}
-# the loop part is useless but its there.
+
+Write-Output "BOM"
+
+#sudo shutdown -r now
